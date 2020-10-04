@@ -1,0 +1,27 @@
+﻿  GameObject.cpp
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\GameObject.cpp(138): error C2259: 'Component': cannot instantiate abstract class
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\Component.h(5): message : see declaration of 'Component'
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\GameObject.cpp(138): message : due to following members:
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\GameObject.cpp(138): message : 'bool Component::OnCreate(GameObject *)': is abstract
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\Component.h(10): message : see declaration of 'Component::OnCreate'
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\GameObject.cpp(138): message : 'void Component::Update(float)': is abstract
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\Component.h(11): message : see declaration of 'Component::Update'
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\GameObject.cpp(38): message : see reference to function template instantiation 'void GameObject::AddComponent<Component>(void)' being compiled
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\GameObject.cpp(138,17): error C2259: 'Component': cannot instantiate abstract class
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\Component.h(5): message : see declaration of 'Component'
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\GameObject.cpp(138,17): message : due to following members:
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\GameObject.cpp(138,17): message : 'bool Component::OnCreate(GameObject *)': is abstract
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\Component.h(10): message : see declaration of 'Component::OnCreate'
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\GameObject.cpp(138,17): message : 'void Component::Update(float)': is abstract
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\Component.h(11): message : see declaration of 'Component::Update'
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\GameObject.cpp(181,1): error C2681: 'int': invalid expression type for dynamic_cast
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\GameObject.cpp(40): message : see reference to function template instantiation 'void GameObject::RemoveComponent<Component>(void)' being compiled
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\GameObject.cpp(183,1): error C2679: binary '=': no operator found which takes a right-hand operand of type 'nullptr' (or there is no acceptable conversion)
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vector(1175,13): message : could be 'std::vector<Component *,std::allocator<Component *>> &std::vector<Component *,std::allocator<Component *>>::operator =(std::initializer_list<_Ty>)'
+          with
+          [
+              _Ty=Component *
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vector(1167,13): message : or       'std::vector<Component *,std::allocator<Component *>> &std::vector<Component *,std::allocator<Component *>>::operator =(const std::vector<Component *,std::allocator<Component *>> &)'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\vector(664,13): message : or       'std::vector<Component *,std::allocator<Component *>> &std::vector<Component *,std::allocator<Component *>>::operator =(std::vector<Component *,std::allocator<Component *>> &&) noexcept(<expr>)'
+D:\Megasync\Visual Studio\Game Engines 4 - Engine - Copy\Game Engines 4 - Engine\Engine\Rendering\3D\GameObject.cpp(183,1): message : while trying to match the argument list '(std::vector<Component *,std::allocator<Component *>>, nullptr)'
