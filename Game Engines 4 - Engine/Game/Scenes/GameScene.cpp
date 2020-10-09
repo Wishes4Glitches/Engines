@@ -49,3 +49,8 @@ void GameScene::Render()
 {
 	SceneGraph::GetInstance()->Render(CoreEngine::GetInstance()->GetCamera());
 }
+
+void GameScene::Draw()
+{
+
+}

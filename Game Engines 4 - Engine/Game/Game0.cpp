@@ -63,3 +63,8 @@ void Game0::BuildScene()
 
 	currentSceneNum = CoreEngine::GetInstance()->GetCurrentScene();
 }
+
+void Game0::Draw()
+{
+
+}

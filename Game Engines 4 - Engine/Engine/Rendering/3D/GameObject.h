@@ -28,11 +28,59 @@ public:
 	void SetHit(bool hit_, int buttonType_);
 
 	template <typename T>
-	void AddComponent();
+	void AddComponent()
+	{
+		T* temp = new T();
+
+		if (dynamic_cast<Component*>(temp))
+		{
+			if (GetComponent<T>())
+			{
+				Debug::Error("Failed to add already existing component, Deleting Components", "GameObject.cpp", __LINE__);
+				delete temp;
+				return;
+			}
+
+			else if (GetComponent<T>() == nullptr)
+			{
+				objects.push_back(temp);
+				temp->OnCreate(this);
+			}
+		}
+
+		else
+		{
+			Debug::Error("Object is not a child of component, Deleting Components", "GameObject.cpp", __LINE__);
+			delete temp;
+			return;
+		}
+	}
+
 	template <typename U>
-	U* GetComponent();
+	U* GetComponent()
+	{
+		for (auto c : objects)
+		{
+			if (dynamic_cast<U*>(c))
+			{
+				return dynamic_cast<U*>(c);
+			}
+		}
+	}
+
 	template <typename V>
-	void RemoveComponent();
+	void RemoveComponent()
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			if (dynamic_cast<V*>(i))
+			{
+				objects = nullptr;
+				objects.erase(objects.begin() + i);
+			}
+		}
+	}
+
 private:
 	Model* model;
 	int modelInstance;
@@ -48,6 +96,5 @@ private:
 	bool hit;
 
 	std::vector<Component*> objects;
-	int i = 0;
 };
 #endif 

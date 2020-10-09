@@ -120,3 +120,8 @@ void SceneGraph::OnDestroy()
 		sceneModels.clear();
 	}
 }
+
+void SceneGraph::Draw()
+{
+
+}

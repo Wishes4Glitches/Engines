@@ -9,7 +9,7 @@ class Component1 : public Component
 public:
 	Component1();
 	~Component1();
-	bool OnCreate(GameObject* parent_);
-	void Update(float deltaTime_);
+	virtual bool OnCreate(GameObject* parent_);
+	virtual void Update(float deltaTime_);
 };
 #endif

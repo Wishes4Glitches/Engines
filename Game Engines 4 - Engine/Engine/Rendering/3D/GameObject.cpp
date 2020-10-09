@@ -34,10 +34,6 @@ void GameObject::Render(Camera* camera_)
 void GameObject::Update(const float deltaTime_)
 {
 	SetAngle(angle + 0.005f);
-
-	AddComponent<Component>();
-	GetComponent<Component>();
-	RemoveComponent<Component>();
 }
 
 glm::vec3 GameObject::GetPosition() const
@@ -129,60 +125,5 @@ void GameObject::SetHit(bool hit_, int buttonType_)
 	if (hit)
 	{
 		std::cout << tag << " was hit" << std::endl;
-	}
-}
-
-
-template <typename T>
-void GameObject::AddComponent()
-{
-	T* temp = new T();
-
-		if (dynamic_cast<Component*>(temp))
-		{
-			if (GetComponent<T>())
-			{
-				Debug::Error("Failed to add already existing component. Deleting Components", "GameObject.cpp", __LINE__);
-				delete temp;
-				return;
-			}
-
-			else if (GetComponent<T>() == nullptr)
-			{
-				objects.push_back(temp);
-				temp->OnCreate(this);
-			}
-		}
-
-		else
-		{
-			Debug::Error("Object is not a child of component. Deleting Components", "GameObject.cpp", __LINE__);
-			delete temp;
-			return;
-		}
-}
-
-template<typename U>
-U* GameObject::GetComponent() 
-{
-	for (auto c : objects)
-	{
-		if (dynamic_cast<U*>(c))
-		{
-			return dynamic_cast<U*>(c);
-		}
-	}
-}
-
-template<typename V>
-void GameObject::RemoveComponent() 
-{
-	for (int i = 0; i < 5; i++)
-	{
-		if (dynamic_cast<V*>(i))
-		{
-			objects = nullptr;
-			objects.erase(objects.begin() + i);
-		}
 	}
 }
