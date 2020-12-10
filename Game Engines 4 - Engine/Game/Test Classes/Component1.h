@@ -11,5 +11,8 @@ public:
 	~Component1();
 	virtual bool OnCreate(GameObject* parent_);
 	virtual void Update(float deltaTime_);
+
+protected:
+	GameObject* parent;
 };
 #endif

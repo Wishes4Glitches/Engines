@@ -17,8 +17,11 @@ bool GameScene::OnCreate()
 	CoreEngine::GetInstance()->SetCamera(new Camera);
 	CoreEngine::GetInstance()->GetCamera()->SetPosition(glm::vec3(1.5f, 0.5f, 4.0f));
 	CoreEngine::GetInstance()->GetCamera()->AddLightSource(glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(1.0f, 1.0f, 1.0f), 0.1f, 0.5f);
+	//emitter = new Emitter(100, "ParticleShader");
 
 	CollisionHandler::GetInstance()->OnCreate();
+
+	AudioHandler::GetInstance()->InitializeAudio(CoreEngine::GetInstance()->GetCamera()->GetCameraPosition());
 
 	Model* model1 = new Model("./Resources/Models/Dice.obj", "./Resources/Materials/Dice.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	SceneGraph::GetInstance()->AddModel(model1);
@@ -29,13 +32,15 @@ bool GameScene::OnCreate()
 
 	GameObject* apple = new GameObject(model2, glm::vec3(2.0f, -1.0f, 0.0f));
 	apple->SetScale(glm::vec3(0.5f));
-	apple->AddComponent<Component1>();
+	/*apple->AddComponent<Component1>();
 	apple->AddComponent<Component2>();
 	apple->AddComponent<Component3>();
 	apple->GetComponent<Component2>();
 	apple->RemoveComponent<Component1>();
-	apple->RemoveComponent<Component3>();
+	apple->RemoveComponent<Component3>();*/
 	SceneGraph::GetInstance()->AddGameObject(apple, "apple");
+
+	apple->AddComponent<AudioBase>("Knock.mp3", true, true, false);
 
 	return true;
 }
@@ -43,11 +48,14 @@ bool GameScene::OnCreate()
 void GameScene::Update(const float deltaTime_)
 {
 	SceneGraph::GetInstance()->Update(deltaTime_);
+
+	//Emitter->Update(deltaTime_);
 }
 
 void GameScene::Render()
 {
 	SceneGraph::GetInstance()->Render(CoreEngine::GetInstance()->GetCamera());
+	//emitter->Render(CoreEngine::GetInstance()->GetCamera());
 }
 
 void GameScene::Draw()

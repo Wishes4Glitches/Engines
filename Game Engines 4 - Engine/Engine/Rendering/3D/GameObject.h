@@ -27,61 +27,7 @@ public:
 	void SetTag(std::string tag_);
 	void SetHit(bool hit_, int buttonType_);
 
-	template <typename T>
-	void AddComponent()
-	{
-		T* temp = new T();
-
-		if (dynamic_cast<Component*>(temp))
-		{
-			if (GetComponent<T>())
-			{
-				Debug::Error("Failed to add already existing component, Deleting Components", "GameObject.cpp", __LINE__);
-				delete temp;
-				return;
-			}
-
-			else if (GetComponent<T>() == nullptr)
-			{
-				objects.push_back(temp);
-				temp->OnCreate(this);
-			}
-		}
-
-		else
-		{
-			Debug::Error("Object is not a child of component, Deleting Components", "GameObject.cpp", __LINE__);
-			delete temp;
-			return;
-		}
-	}
-
-	template <typename U>
-	U* GetComponent()
-	{
-		for (auto c : objects)
-		{
-			if (dynamic_cast<U*>(c))
-			{
-				return dynamic_cast<U*>(c);
-			}
-		}
-	}
-
-	template <typename V>
-	void RemoveComponent()
-	{
-		for (int i = 0; i < 5; i++)
-		{
-			if (dynamic_cast<V*>(i))
-			{
-				objects = nullptr;
-				objects.erase(objects.begin() + i);
-			}
-		}
-	}
-
-private:
+//private:
 	Model* model;
 	int modelInstance;
 
@@ -96,5 +42,70 @@ private:
 	bool hit;
 
 	std::vector<Component*> objects;
+
+	template <typename TComponent, typename ... Args>
+	void AddComponent(Args&& ... args_)
+	{
+		TComponent* tComponentPTR = new TComponent(std::forward<Args>(args_)...);
+		std::cout << "adding component \n";
+
+		if (dynamic_cast<Component*>(tComponentPTR) == nullptr)
+		{
+			Debug::Error("Failed to add already existing component, Deleting Components", "GameObject.cpp", __LINE__);
+			delete tComponentPTR;
+			tComponentPTR == nullptr;
+
+			return;
+		}
+
+		if (GetComponent<TComponent>() != nullptr)
+		{
+			Debug::Error("Object is not a child of component, Deleting Components", "GameObject.cpp", __LINE__);
+			delete tComponentPTR;
+			tComponentPTR == nullptr;
+
+			return;
+		}
+
+		objects.push_back(tComponentPTR);
+		tComponentPTR->OnCreate(this);
+		std::cout << "Component Created" << std::endl;
+	}
+
+	template<typename TComponent>
+	Component* GetComponent() {
+
+		if (objects.size() <= 0) {
+			std::cout << "Component list is empty\n";
+			return nullptr;
+		}
+
+		for (auto element : objects) {
+
+			if (dynamic_cast<TComponent*>(element) != nullptr) {
+				std::cout << "return tcompptr\n";
+				return element;
+			}
+			else {
+				std::cout << "return nullptr\n";
+				return nullptr;
+			}
+		}
+	}
+
+
+	template<typename TComponent>
+	void RemoveComponent() {
+		std::cout << "entered RemoveComponent\n";
+
+		for (int i = 0; i < objects.size(); i++) {
+
+			if (dynamic_cast<TComponent*>(objects[i]) != nullptr) {
+				objects.erase(objects.begin() + i);
+				std::cout << "Component deleted\n";
+			}
+		}
+	}
+
 };
 #endif 

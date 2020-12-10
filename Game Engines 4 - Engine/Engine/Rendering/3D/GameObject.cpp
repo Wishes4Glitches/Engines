@@ -15,12 +15,20 @@ GameObject::GameObject(Model* model_, glm::vec3 position_) : model(nullptr)
 		box = model->GetBoundingBox();
 		box.gameTransform = model->GetTransform(modelInstance);
 	}
+	objects.reserve(10);
 }
 
 GameObject::~GameObject()
 {
+	for (auto comp : objects)
+	{
+		delete& objects;
+		delete comp;
+		comp = nullptr;
+	}
+
 	model = nullptr;
-	objects[0] = nullptr;
+	objects.clear();
 }
 
 void GameObject::Render(Camera* camera_)
@@ -34,6 +42,9 @@ void GameObject::Render(Camera* camera_)
 void GameObject::Update(const float deltaTime_)
 {
 	SetAngle(angle + 0.005f);
+	for (int i = 0; i < objects.size(); i++) {
+		objects[i]->Update(deltaTime_);
+	}
 }
 
 glm::vec3 GameObject::GetPosition() const

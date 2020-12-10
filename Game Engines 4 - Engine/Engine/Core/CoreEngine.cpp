@@ -41,6 +41,8 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 
 	ShaderHandler::GetInstance()->CreateProgram("basicShader", "Engine/Shaders/VertexShader.glsl", "Engine/Shaders/FragmentShader.glsl");
 
+	ShaderHandler::GetInstance()->CreateProgram("spriteShader", "Engine/Shaders/SpriteVertShader.glsl", "Engine/Shaders/SpriteFragShader.glsl");
+
 	if (gameInterface)
 	{
 		if (!gameInterface->OnCreate())
@@ -107,12 +109,13 @@ void CoreEngine::Update(const float deltaTime_)
 
 void CoreEngine::Render()
 {
-	glClearColor(1.0f, 0.0f, 0.0f, 1.0f); // always clear it blank
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // always clear it blank
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // then clear the objects on the screen
 	//Game's Render
 	if (gameInterface)
 	{
 		gameInterface->Render();
+		gameInterface->Draw();
 	}
 
 	SDL_GL_SwapWindow(window->GetWindow());

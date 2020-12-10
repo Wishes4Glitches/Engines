@@ -7,6 +7,9 @@
 #include "../Test Classes/Component2.h"
 #include "../Test Classes/Component3.h"
 #include <glm/gtx/string_cast.hpp>
+#include "../../Engine/Audio/AudioHandler.h"
+#include "../../Engine/FX/Particle.h"
+#include "../../Engine/FX/ParticleEmitter.h"
 
 class GameScene : public Scene
 {
